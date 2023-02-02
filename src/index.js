@@ -45,65 +45,70 @@ const DOTS={
 
 
 
+//Сonverts numbers to morse:
 
-//делит числа на слова и переводит в морзе
-function morseWords(letters){
+function morseWords(words){
     let result = [];
-    let words = [];
+    let numbLetters = [];
 
-    for(let i=0 ; i<letters.length ; i+=10){
-        words.push(letters.substring( i , i+10 ));
+    for(let i=0 ; i<words.length ; i+=10){
+        numbLetters.push(words.substring( i , i+10 ));
     }
 
-    for(let num of words) {
+    for(let numb of numbLetters) {
 
-        let word = [];
+        let morseLetter = [];
 
-        for(let i=0 ; i<num.length ; i+=2) {
+        for(let i=0 ; i<numb.length ; i+=2) {
 
-        let letter = num.substring(i,i+2);
+        let letter = numb.substring(i,i+2);
 
         if ( letter == '00' ) {
             continue;
         } else {
-            word.push( DOTS[letter] );
+            morseLetter.push( DOTS[letter] );
         }
     
     }
 
-    result.push( word.join('') );
+    result.push( morseLetter.join('') );
 
     }
 
     return result;
 }
 
-//переводит морзе в слова;
+
+
+//Сonverts morse to letters:
+
 function decode(expr) {
 
  let result=[];
 
  let phrase=morseWords(expr);
 
- for ( let dot of phrase ) {
+ for ( let dots of phrase ) {
 
-    if ( dot == '**********' ) {
+    if ( dots == '**********' ) {
         
         result.push(' '); 
 
-    } else if ( dot==' ' || dot==',' ) {
+    } else if ( dots==' ' || dots==',' ) {
         
         continue;
 
     } else {
 
-        result.push( MORSE_TABLE[dot] );
+        result.push( MORSE_TABLE[dots] );
 
     }
     
  }
  return result.join('');
 }
+
+
 
 
 module.exports = {
